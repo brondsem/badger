@@ -11,4 +11,16 @@ class User < ActiveRecord::Base
   def name
     [first_name, last_name].join(" ")
   end
+
+  def self.alphabetical
+    order("last_name asc, first_name asc")
+  end
+
+  def role
+    if admin || super_admin
+      "Admin"
+    else
+      "Standard"
+    end
+  end
 end
