@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize!
-  before_action :find_user, only: [:edit, :update]
+  before_action :find_user, only: [:edit, :update, :destroy]
 
   def index
     @users = User.alphabetical
@@ -67,6 +67,16 @@ class UsersController < ApplicationController
     else
       flash[:alert] = "Unable to update user."
       render :edit
+    end
+  end
+
+  def destroy
+    if @user.destroy
+      flash[:notice] = "Successfully removed user #{@user.name}."
+      redirect_to users_path
+    else
+      flash[:alert] = "Unable to remove user #{@user.name}."
+      redirect_to users_path
     end
   end
 
