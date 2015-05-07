@@ -1,0 +1,27 @@
+<h2>Users</h2>
+
+<%= link_to "Add Attendee", new_attendee_path %>
+
+<table>
+  <tr>
+    <th>Last</th>
+    <th>First</th>
+    <th>Email</th>
+    <th></th>
+  </tr>
+  <% @attendees.each do |attendee| %>
+    <tr>
+      <td><%= attendee.last_name %></td>
+      <td><%= attendee.first_name %></td>
+      <td><%= attendee.email %></td>
+      <% if current_user.super_admin %>
+        <td>
+          <%= link_to "Edit", edit_attendee_path(attendee) %>
+          <%= link_to "Remove", attendee_path(attendee), method: :delete %>
+        </td>
+      <% else %>
+        <td></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>

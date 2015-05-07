@@ -1,32 +1,34 @@
 class AttendeesController < ApplicationController
+  before_action :find_attendee, only: [:show, :edit, :update, :destroy]
+  def index
+    @attendees = @event.attendees.all
+  end
 
   def new
-    @event = Event.find(params[:event_id])
-    @attendee = @event.attendees.new
+    @attendee = Attendee.new
   end
 
   def create
     @event = Event.find(params[:event_id])
-    @attendee = @event.attendees.build(attendee_params)
+    @attendee = @event.attendees.new(attendee_params)
 
     if @attendee.save
-      redirect_to event_path(@event)
+      redirect_to attendees_path
     else
       render :new
     end
   end
 
   def edit
-    @event = Event.find(params[:event_id])
     @attendee = @event.attendees.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:event_id])
-
-    if @event.attendees.find(params[:id]).update(attendee_params)
-      redirect_to event_path(@event)
+    if @attendee.update_attributes(attendee_params)
+      flash[:notice] = "Successfully updated attendee."
+      redirect_to attendees_path
     else
+      flash[:alert] = "Unable to update attendee."
       render :edit
     end
   end
@@ -52,18 +54,24 @@ class AttendeesController < ApplicationController
   end
 
   def destroy
-    @event = Event.find(params[:event_id])
-
-    attendee = @event.attendees.find(params[:id])
-    attendee.destroy
-
-    redirect_to event_path(@event)
+    if @attendee.destroy
+      flash[:notice] = "Successfully removed attendee #{@attendee.name}."
+      redirect_to attendees_path
+    else
+      flash[:alert] = "Unable to remove attendee #{@attendee.name}."
+      redirect_to users_path
+    end
   end
 
   private
 
   def attendee_params
     params.require(:attendee).permit(:first_name, :last_name, :email, :registration_key, :preferences, :role_id, :checked_in, :exported)
+  end
+
+  def find_attendee
+    @event = Event.find(params[:event_id])
+    @attendee = @event.attendees.find(params[:id])
   end
 
 end

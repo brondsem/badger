@@ -7,4 +7,8 @@ class Attendee < ActiveRecord::Base
   def self.not_exported
     where(exported: false)
   end
+
+  def name
+    [first_name, last_name].join(" ")
+  end
 end
