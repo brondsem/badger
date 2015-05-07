@@ -1,4 +1,6 @@
 class EventsController < ApplicationController
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
+
   def index
     if current_user.admin
       @events = Event.upcoming
@@ -23,32 +25,33 @@ class EventsController < ApplicationController
     end
   end
 
-  def show
-    @event = Event.find(params[:id])
-  end
-
-  def edit
-    @event = Event.find(params[:id])
-  end
-
   def update
-    @event = Event.find(params[:id])
-
-    if @event.update(event_params)
+    if @event.update_attributes(event_params)
+      flash[:notice] = "Successfully updated event."
       redirect_to events_path
     else
+      flash[:alert] = "Unable to update event."
       render :edit
     end
   end
 
   def destroy
-    Event.find(params[:id]).destroy
-    redirect_to events_path
+    if @event.destroy
+      flash[:notice] = "Successfully removed event #{@event.name}."
+      redirect_to events_path
+    else
+      flash[:alert] = "Unable to remove event."
+      redirect_to events_path
+    end
   end
 
   private
 
   def event_params
     params.require(:event).permit(:name, :start_date, :end_date, :logo)
+  end
+
+  def find_event
+    @event = Event.find(params[:id])
   end
 end
