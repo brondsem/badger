@@ -1,9 +1,9 @@
 class AttendeesController < ApplicationController
   before_action :find_attendee, only: [:show, :edit, :update, :destroy]
-  before_action :find_event, only: [:index, :import_csv]
+  before_action :find_event, only: [:index, :new, :edit, :import_csv, :export_blanks]
 
   def index
-    @attendees = @event.attendees.alphabetical
+    @attendees = @event.attendees.alphabetical.includes(:role)
   end
 
   def new
@@ -15,7 +15,7 @@ class AttendeesController < ApplicationController
     @attendee = @event.attendees.new(attendee_params)
 
     if @attendee.save
-      redirect_to event_attendees_path(@attendee.event)
+      redirect_to event_attendees_path(params[:event_id])
     else
       render :new
     end
@@ -66,7 +66,7 @@ class AttendeesController < ApplicationController
   end
 
   def import_csv
-    result = ImportAttendees.call({event_id: params[:event_id]}.merge(import_params))
+    result = ImportAttendees.call({event: @event}.merge(import_params))
 
     if result.success?
       flash[:notice] = "Imported Attendees"
@@ -78,8 +78,13 @@ class AttendeesController < ApplicationController
   end
 
   def export
-    result = ExportAttendees.call(attendees: Attendee.alphabetical)
-    render text: "WIP"
+    result = ExportAttendees.call(attendees: Attendee.alphabetical.includes(:role))
+    send_data result.pdf.render, filename: 'badges.pdf', type: 'application/pdf', disposition: 'inline'
+  end
+
+  def export_blanks
+    result = ExportAttendees.call(blanks: true, event: @event)
+    send_data result.pdf.render, filename: 'blank_badges.pdf', type: 'application/pdf', disposition: 'inline'
   end
 
   private

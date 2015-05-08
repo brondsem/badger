@@ -32,6 +32,10 @@ class ImportAttendees
           exported: false
         )
       end
+
+      if context.event.sponsor_companies.include?(attendee.company.try(:downcase))
+        attendee.update_attribute(:role, Role.find_by(name: "Sponsor"))
+      end
     end
   end
 end
