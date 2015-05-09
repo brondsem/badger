@@ -1,6 +1,6 @@
 class AttendeesController < ApplicationController
   before_action :find_attendee, only: [:show, :edit, :update, :destroy]
-  before_action :find_event, only: [:index, :new, :edit, :import_csv, :export_blanks]
+  before_action :find_event, only: [:index, :new, :edit, :import_csv, :export, :export_blanks]
 
   def index
     @attendees = @event.attendees.alphabetical.includes(:role)
@@ -78,8 +78,14 @@ class AttendeesController < ApplicationController
   end
 
   def export
-    result = ExportAttendees.call(attendees: Attendee.alphabetical.includes(:role))
-    send_data result.pdf.render, filename: 'badges.pdf', type: 'application/pdf', disposition: 'inline'
+    attendees = Attendee.pending.alphabetical.includes(:role)
+    if attendees.present?
+      result = ExportAttendees.call(attendees: attendees)
+      send_data result.pdf.render, filename: 'badges.pdf', type: 'application/pdf', disposition: 'inline'
+    else
+      flash[:alert] = "No Attendees to Export (PDF)"
+      redirect_to event_attendees_path(@event)
+    end
   end
 
   def export_blanks

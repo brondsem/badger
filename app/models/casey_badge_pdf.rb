@@ -1,6 +1,6 @@
 class CaseyBadgePdf < Prawn::Document
   attr_reader :attendees, :event, :roles
-  WIDTH = 230
+  WIDTH = 220
   HEIGHT = 347
   BORDER_WIDTH = 10
 
@@ -35,10 +35,10 @@ class CaseyBadgePdf < Prawn::Document
 
   def blank_badge(role, ord)
     badge_bounds = {
-      1 => [bounds.left + 35, bounds.top - 8],
-      2 => [bounds.right - WIDTH - 35, bounds.top - 8],
-      3 => [bounds.left + 35, bounds.bottom + HEIGHT + 8],
-      4 => [bounds.right - WIDTH - 35, bounds.bottom + HEIGHT + 8]
+      1 => [bounds.left + 45, bounds.top - 8],
+      2 => [bounds.right - WIDTH - 45, bounds.top - 8],
+      3 => [bounds.left + 45, bounds.bottom + HEIGHT + 8],
+      4 => [bounds.right - WIDTH - 45, bounds.bottom + HEIGHT + 8]
     }
 
     bounding_box(badge_bounds[ord + 1], :width => WIDTH, :height => HEIGHT) do
@@ -87,24 +87,24 @@ class CaseyBadgePdf < Prawn::Document
   def draw_print_lines
     # line [x, y], [x, y]
     # Top
-    line [bounds.left + 30, bounds.top + 25], [bounds.left + 30, bounds.top - 4] # Left
+    line [bounds.left + 40, bounds.top + 25], [bounds.left + 40, bounds.top - 4] # Left
     line [bounds.width / 2, bounds.top + 25], [bounds.width / 2, bounds.top - 4] # Middle
-    line [bounds.right - 30, bounds.top + 25], [bounds.right - 30, bounds.top - 4] # Right
+    line [bounds.right - 40, bounds.top + 25], [bounds.right - 40, bounds.top - 4] # Right
 
     # Bottom
-    line [bounds.left + 30, bounds.bottom + 4], [bounds.left + 30, bounds.bottom - 25] # Left
+    line [bounds.left + 40, bounds.bottom + 4], [bounds.left + 40, bounds.bottom - 25] # Left
     line [bounds.width / 2, bounds.bottom + 4], [bounds.width / 2, bounds.bottom - 25] # Middle
-    line [bounds.right - 30, bounds.bottom + 4], [bounds.right - 30, bounds.bottom - 25] # Right
+    line [bounds.right - 40, bounds.bottom + 4], [bounds.right - 40, bounds.bottom - 25] # Right
 
     # Left
-    line [bounds.left - 25, bounds.top - 4], [bounds.left + 30, bounds.top - 4] # Top
-    line [bounds.left - 25, bounds.height / 2], [bounds.left + 30, bounds.height / 2] # Middle
-    line [bounds.left - 25, bounds.bottom + 4], [bounds.left + 30, bounds.bottom + 4] # Bottom
+    line [bounds.left - 25, bounds.top - 4], [bounds.left + 40, bounds.top - 4] # Top
+    line [bounds.left - 25, bounds.height / 2], [bounds.left + 40, bounds.height / 2] # Middle
+    line [bounds.left - 25, bounds.bottom + 4], [bounds.left + 40, bounds.bottom + 4] # Bottom
 
     # Right
-    line [bounds.right + 25, bounds.top - 4], [bounds.right - 30, bounds.top - 4] # Top
-    line [bounds.right + 25, bounds.height / 2], [bounds.right - 30, bounds.height / 2] # Middle
-    line [bounds.right + 25, bounds.bottom + 4], [bounds.right - 30, bounds.bottom + 4] # Top
+    line [bounds.right + 25, bounds.top - 4], [bounds.right - 40, bounds.top - 4] # Top
+    line [bounds.right + 25, bounds.height / 2], [bounds.right - 40, bounds.height / 2] # Middle
+    line [bounds.right + 25, bounds.bottom + 4], [bounds.right - 40, bounds.bottom + 4] # Top
 
     # Draw Lines
     stroke_color '7E7E7E'
@@ -117,10 +117,10 @@ class CaseyBadgePdf < Prawn::Document
 
   def create_badge(attendee, ord)
     badge_bounds = {
-      1 => [bounds.left + 35, bounds.top - 8],
-      2 => [bounds.right - WIDTH - 35, bounds.top - 8],
-      3 => [bounds.left + 35, bounds.bottom + HEIGHT + 8],
-      4 => [bounds.right - WIDTH - 35, bounds.bottom + HEIGHT + 8]
+      1 => [bounds.left + 45, bounds.top - 8],
+      2 => [bounds.right - WIDTH - 45, bounds.top - 8],
+      3 => [bounds.left + 45, bounds.bottom + HEIGHT + 8],
+      4 => [bounds.right - WIDTH - 45, bounds.bottom + HEIGHT + 8]
     }
 
     bounding_box(badge_bounds[ord + 1], :width => WIDTH, :height => HEIGHT) do
@@ -131,7 +131,7 @@ class CaseyBadgePdf < Prawn::Document
 
       # This is here instead of higher in the chain for blank tag generation
       draw_name(attendee)
-      text attendee.company, size: 15, align: :center
+      text attendee.company, size: 14, align: :center
       draw_role(attendee)
 
       stroke_color attendee.role.border_color

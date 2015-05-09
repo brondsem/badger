@@ -8,6 +8,10 @@ class Attendee < ActiveRecord::Base
     where(exported: false)
   end
 
+  def self.pending
+    where(exported: false)
+  end
+
   def name
     [first_name, last_name].join(" ")
   end

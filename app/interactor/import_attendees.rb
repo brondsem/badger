@@ -33,7 +33,7 @@ class ImportAttendees
         )
       end
 
-      if context.event.sponsor_companies.include?(attendee.company.try(:downcase))
+      if context.event.sponsor_companies.map { |c| c.company.downcase.squish }.include?(attendee.company.try(:downcase).try(:squish))
         attendee.update_attribute(:role, Role.find_by(name: "Sponsor"))
       end
     end
