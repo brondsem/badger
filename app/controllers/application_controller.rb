@@ -18,4 +18,10 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:first_name, :last_name, :email, :password) }
   end
+
+  def authorize_super_admin!
+    unless user_signed_in? && current_user.super_admin
+      redirect_to events_path
+    end
+  end
 end

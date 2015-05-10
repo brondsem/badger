@@ -1,4 +1,5 @@
 class AttendeesController < ApplicationController
+  before_action :authorize!
   before_action :find_attendee, only: [:show, :edit, :update, :destroy]
   before_action :find_event, only: [:index, :new, :edit, :import_csv, :export, :export_blanks]
 

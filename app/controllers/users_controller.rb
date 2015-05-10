@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authorize!
+  before_action :authorize_super_admin!
   before_action :find_user, only: [:edit, :update, :destroy]
 
   def index

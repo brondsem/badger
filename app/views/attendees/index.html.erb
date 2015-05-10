@@ -1,8 +1,11 @@
 <h2>Attendees</h2>
 
 <%= link_to "Add Attendee", new_event_attendee_path %>
-<%= link_to "Import Attendees", import_event_attendees_path %>
-<%= link_to "Generate Badges", export_event_attendees_path %>
+
+<% if current_user.admin %>
+  <%= link_to "Import Attendees", import_event_attendees_path %>
+  <%= link_to "Generate Badges", export_event_attendees_path %>
+<% end %>
 
 <table>
   <tr>
@@ -20,14 +23,12 @@
       <td><%= attendee.email %></td>
       <td><%= attendee.company %></td>
       <td><%= attendee.role.name %></td>
-      <% if current_user.super_admin %>
-        <td>
-          <%= link_to "Edit", edit_event_attendee_path(attendee.event, attendee) %>
+      <td>
+        <%= link_to "Edit", edit_event_attendee_path(attendee.event, attendee) %>
+        <% if current_user.super_admin %>
           <%= link_to "Remove", event_attendee_path(attendee.event, attendee), method: :delete %>
-        </td>
-      <% else %>
-        <td></td>
-      <% end %>
+        <% end %>
+      </td>
     </tr>
   <% end %>
 </table>
