@@ -6,12 +6,4 @@
 
 table.attendees-table {
   width: 980px;
-
-  td:first-child {
-    width: 150px;
-  }
-
-  td:first-child  + td {
-    width: 150px;
-  }
 }

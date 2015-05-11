@@ -1,5 +1,10 @@
 <% attendees.each do |attendee| %>
   <tr>
+    <td>
+      <%= form_for [@event, attendee], remote: true do |form| %>
+        <%= form.check_box :checked_in %>
+      <% end %>
+    </td>
     <td><%= attendee.last_name %></td>
     <td><%= attendee.first_name %></td>
     <td><%= attendee.email %></td>
