@@ -13,8 +13,9 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "pg"
 gem "prawn"
-gem "uglifier"
+gem "ransack"
 gem "sass-rails"
+gem "uglifier"
 
 group :development, :test do
   gem "pry-rails"

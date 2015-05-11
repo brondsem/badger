@@ -1,0 +1,15 @@
+<% attendees.each do |attendee| %>
+  <tr>
+    <td><%= attendee.last_name %></td>
+    <td><%= attendee.first_name %></td>
+    <td><%= attendee.email %></td>
+    <td><%= attendee.company %></td>
+    <td><%= attendee.role.name %></td>
+    <td>
+      <%= link_to "Edit", edit_event_attendee_path(attendee.event, attendee) %>
+      <% if current_user.super_admin %>
+        <%= link_to "Remove", event_attendee_path(attendee.event, attendee), method: :delete %>
+      <% end %>
+    </td>
+  </tr>
+<% end %>

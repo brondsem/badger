@@ -1,10 +1,11 @@
 class AttendeesController < ApplicationController
   before_action :authorize!
   before_action :find_attendee, only: [:show, :edit, :update, :destroy]
-  before_action :find_event, only: [:index, :new, :edit, :import_csv, :export, :export_blanks]
+  before_action :find_event
 
   def index
-    @attendees = @event.attendees.alphabetical.includes(:role)
+    @q = @event.attendees.ransack(params[:q])
+    @attendees = @q.result.alphabetical.includes(:role)
   end
 
   def new
