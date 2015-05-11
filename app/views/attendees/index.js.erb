@@ -1,1 +1,6 @@
 $("[data-attendees-content]").html('<%= escape_javascript(render("attendees", attendees: @attendees)) %>');
+
+$("input[id=attendee_checked_in]").on("change", function() {
+  console.log("checked in")
+  $(this).closest("form").submit();
+});
