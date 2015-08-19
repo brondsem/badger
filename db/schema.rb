@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20151019231942) do
     t.boolean  "exported"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.string   "confirmation"
   end
 
   add_index "attendees", ["event_id"], name: "index_attendees_on_event_id", using: :btree

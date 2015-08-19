@@ -16,7 +16,7 @@ class ImportAttendees
     require "csv"
 
     CSV.foreach(file.path, headers: true) do |row|
-      attendee = context.event.attendees.find_or_create_by(first_name: row['first_name'], last_name: row['last_name'], email: row['email'])
+      attendee = context.event.attendees.find_or_create_by(confirmation: row['confirmation'])
 
       unless attendee.exported
         attendee.update_attributes(

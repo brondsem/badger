@@ -7,6 +7,12 @@ class CaseyBadgePdf < Prawn::Document
   def initialize(attendees, event = nil)
     super()
 
+    font_families.update("Helvetica" => {
+      normal: Rails.root.join("vendor/fonts/Helvetica/Helvetica.ttf"),
+      bold:   Rails.root.join("vendor/fonts/Helvetica/Helvetica-Bold.ttf")
+    })
+    font "Helvetica"
+
     if attendees
       @attendees = attendees
       @event = attendees.first.event
@@ -47,6 +53,9 @@ class CaseyBadgePdf < Prawn::Document
 
       draw_logo
 
+      move_down 100
+      text "INTERESTS:", size: 14, align: :center, style: :bold, color: 'FF0000'
+
       text role.name, align: :center, size: 25, valign: :bottom
 
       stroke_color role.border_color
@@ -58,6 +67,8 @@ class CaseyBadgePdf < Prawn::Document
   def generate_pdf
     attendees.group_by(&:role).each do |role, role_attendees|
       role_attendees.each_slice(4).with_index do |page, num|
+        start_new_page unless num == 0
+
         page.each_with_index do |attendee, i|
           create_badge(attendee, i) if attendee
         end
@@ -79,7 +90,7 @@ class CaseyBadgePdf < Prawn::Document
 
         draw_print_lines
 
-        start_new_page
+        # start_new_page
       end
     end
   end
@@ -132,6 +143,11 @@ class CaseyBadgePdf < Prawn::Document
       # This is here instead of higher in the chain for blank tag generation
       draw_name(attendee)
       text attendee.company, size: 14, align: :center
+      text attendee.twitter_handle, size: 16, align: :center
+
+      move_down 15
+
+      text "INTERESTS:", size: 14, align: :center, style: :bold, color: 'FF0000'
       draw_role(attendee)
 
       stroke_color attendee.role.border_color
@@ -143,14 +159,14 @@ class CaseyBadgePdf < Prawn::Document
   def draw_logo
     image event.logo.file.file, position: :center, width: WIDTH - (BORDER_WIDTH * 2)
 
-    move_down 60
+    # move_down 60
+    move_down 20
   end
 
   def draw_name(attendee)
     text attendee.first_name, align: :center, size: 34, style: :bold
     move_down 5
     text attendee.last_name, align: :center, size: 30, style: :bold
-    move_down 15
   end
 
   def draw_role(attendee)
