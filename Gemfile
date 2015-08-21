@@ -16,7 +16,7 @@ gem "prawn"
 gem "ransack"
 gem "uglifier"
 
-# Styels
+# Styles
 gem "bourbon"
 gem "neat"
 gem "sass-rails"
