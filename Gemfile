@@ -18,10 +18,10 @@ gem "sass-rails"
 
 group :development, :test do
   gem "pry-rails"
+  gem 'rspec-rails'
 end
 
 group :test do
-  gem 'rspec-rails'
   gem 'guard-rails'
   gem 'guard-bundler'
 end
