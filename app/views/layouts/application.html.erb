@@ -7,17 +7,24 @@
 </head>
 <body>
   <header>
-    <h1 class="title">Badger Badger Badger</h1>
+    <h1 class="title"><a href="<%= root_path %>">Badger Badger Badger</a></h1>
 
     <% if user_signed_in? %>
-      <% if current_user.admin || current_user.manager %>
-        <%= link_to "Users", users_path %>
-      <% end %>
-      <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      <p>
+        Welcome, <%= current_user.name %>!
+        <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+      </p>
     <% else %>
       <%= link_to "Login", new_user_session_path %>
     <% end %>
   </header>
+
+  <nav>
+    <% if user_signed_in? && (current_user.admin || current_user.manager) %>
+      <%= link_to "Users", users_path %>
+      <%= link_to "Events", events_path %>
+    <% end %>
+  </nav>
 
   <main>
     <p class="notice"><%= notice %></p>
