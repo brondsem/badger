@@ -1,0 +1,17 @@
+default: &default
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: badger-development
+  host: localhost
+
+test:
+  <<: *default
+  database: badger-test
+
+production:
+  <<: *default
+  database: badgerbadgerbadger
