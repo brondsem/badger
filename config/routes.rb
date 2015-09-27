@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     post :admin_create, on: :collection
   end
 
+  resources :events
+
   root to: "home#index"
 end
