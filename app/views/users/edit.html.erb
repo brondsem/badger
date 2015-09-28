@@ -37,7 +37,16 @@
     <%= f.check_box :manager %>
   </div>
 
+  <div class="field">
+    <%= f.label :event_ids, "Events" %><br />
+    <% Event.alphabetical.each do |event| %>
+      <%= check_box_tag :user_event_ids, event.id, @user.events.include?(event), name: "user[event_ids][]" %>
+      <%= event.name %>
+      <br />
+    <% end %>
+  </div>
+
   <div class="actions">
-    <%= f.submit "Update" %>
+    <%= f.submit %>
   </div>
 <% end %>
