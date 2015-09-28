@@ -15,8 +15,8 @@
     <td><%= l(event.start_date.to_date, format: :long) %></td>
     <td><%= l(event.end_date.to_date, format: :long) %></td>
     <td>
-      <% if current_user.admin || current_user.manager %>
-        <%= link_to "Edit", edit_event_path(event) %>
+      <%= link_to "Edit", edit_event_path(event) %>
+      <% if current_user.admin %>
         <%= link_to "Delete", event_path(event), method: :delete %>
       <% end %>
     </td>
