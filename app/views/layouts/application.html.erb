@@ -22,8 +22,8 @@
   <nav>
     <% if user_signed_in? && (current_user.admin || current_user.manager) %>
       <%= link_to "Users", users_path %>
-      <%= link_to "Events", events_path %>
     <% end %>
+    <%= link_to "Events", events_path %>
   </nav>
 
   <main>

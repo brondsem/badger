@@ -1,6 +1,8 @@
 <h2>Events</h2>
 
-<%= link_to "Add Event", new_event_path %>
+<% if current_user.admin || current_user.manager %>
+  <%= link_to "Add Event", new_event_path %>
+<% end %>
 
 <table>
   <thead>
