@@ -1,0 +1,15 @@
+<%= form_for([event, role]) do |f| %>
+<div class="field">
+  <%= f.label :name, value: "Role name" %><br />
+  <%= f.text_field :name, autofocus: true %>
+</div>
+
+<div class="field">
+  <%= f.label :reference_key, value: "Reference Key" %><br />
+  <%= f.text_field :reference_key, autofocus: true %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

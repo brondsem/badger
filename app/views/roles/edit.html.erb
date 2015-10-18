@@ -1,0 +1,13 @@
+<h2>Edit role</h2>
+
+<% if @role.errors.any? %>
+  <p class="alert">Unable to update role.
+  <ul>
+    <% @role.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  </p>
+<% end %>
+
+<%= render "form", event: @event, role: @role %>
