@@ -1,5 +1,5 @@
-<h1>Attendee Roles</h1>
-<small><%= @event.name %></small>
+<h4><%= link_to @event.name, event_path(@event) %></h4>
+<h1>Roles</h1>
 
 <%= link_to "New Role", new_event_role_path(@event) %>
 <table>

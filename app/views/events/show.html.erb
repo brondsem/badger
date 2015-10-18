@@ -1,3 +1,28 @@
 <h2><%= @event.name %></h2>
+<nav>
+  <%= link_to "Roles", event_roles_path(@event) %>
+</nav>
+
 
 <%= image_tag(@event.logo) %>
+<%= link_to "New attendee", new_event_attendee_path(@event) %>
+
+<table>
+  <th>First Name</th>
+  <th>Last Name</th>
+  <th>Email</th>
+  <th></th>
+  <% @event.attendees.each do |attendee| %>
+    <tr>
+      <td><%= attendee.first_name %></td>
+      <td><%= attendee.last_name %></td>
+      <td><%= attendee.email %></td>
+      <td>
+        <%= link_to "Edit", edit_event_attendee_path(@event, attendee) %>
+        <% if current_user.admin %>
+          <%= link_to "Delete", event_attendee_path(@event, attendee), method: :delete %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>

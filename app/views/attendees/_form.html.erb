@@ -1,0 +1,25 @@
+<%= form_for([event, attendee]) do |f| %>
+<div class="field">
+  <%= f.label :first_name %><br />
+  <%= f.text_field :first_name, autofocus: true %>
+</div>
+
+<div class="field">
+  <%= f.label :last_name %><br />
+  <%= f.text_field :last_name %>
+</div>
+
+<div class="field">
+  <%= f.label :email %><br />
+  <%= f.text_field :email %>
+</div>
+
+<div class="field">
+  <%= f.label :role %><br />
+  <%= f.select :role_id, options_for_select(@event.roles.pluck(:name, :id)) %>
+</div>
+
+<div class="actions">
+  <%= f.submit %>
+</div>
+<% end %>

@@ -1,0 +1,13 @@
+<h2>Edit attendee</h2>
+
+<% if @attendee.errors.any? %>
+  <p class="alert">Unable to update attendee.
+  <ul>
+    <% @attendee.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  </p>
+<% end %>
+
+<%= render "form", event: @event, attendee: @attendee %>
