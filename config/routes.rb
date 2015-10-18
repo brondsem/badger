@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :roles
+    resources :attendees
   end
 
   root to: "home#index"
