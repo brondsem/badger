@@ -6,17 +6,21 @@
 
 <%= image_tag(@event.logo) %>
 <%= link_to "New attendee", new_event_attendee_path(@event) %>
+<%= link_to "Import Attendees", import_event_attendees_path(@event) %>
+<%= link_to "Generate Badges", export_event_attendees_path(@event) %>
 
 <table>
   <th>First Name</th>
   <th>Last Name</th>
   <th>Email</th>
+  <th>Role</th>
   <th></th>
   <% @event.attendees.each do |attendee| %>
     <tr>
       <td><%= attendee.first_name %></td>
       <td><%= attendee.last_name %></td>
       <td><%= attendee.email %></td>
+      <td><%= attendee.role.name %></td>
       <td>
         <%= link_to "Edit", edit_event_attendee_path(@event, attendee) %>
         <% if current_user.admin %>

@@ -6,7 +6,13 @@ Rails.application.routes.draw do
 
   resources :events do
     resources :roles
-    resources :attendees
+    resources :attendees do
+      collection do
+        get :import
+        post :import, to: "import#attendees"
+        post :export
+      end
+    end
   end
 
   root to: "home#index"
