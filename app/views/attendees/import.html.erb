@@ -1,0 +1,5 @@
+<%= form_tag(import_event_attendees_path, multipart: true, method: :post) do %>
+  <%= label_tag :file, "Select .CSV file" %>
+  <%= file_field_tag :file %>
+  <%= submit_tag %>
+<% end %>
