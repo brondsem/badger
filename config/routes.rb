@@ -11,6 +11,7 @@ Rails.application.routes.draw do
         get :import
         post :import, to: "import#attendees"
         post :export
+        post :export_blanks
       end
     end
   end

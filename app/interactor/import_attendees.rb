@@ -28,7 +28,8 @@ class ImportAttendees
             twitter: row['twitter'],
             company: row["company"]
           },
-          role: context.event.roles.find_by(name: row["role"].strip)
+          role: context.event.roles.find_by(name: row["role"].strip),
+          exported: false
         )
       end
     end

@@ -31,6 +31,26 @@ class AttendeesController < ApplicationController
     end
   end
 
+  def export
+    event = Event.find(params[:event_id])
+    attendees = event.attendees.includes(:role).alphabetical
+
+    if attendees.not_exported.present?
+      result = ExportAttendees.call(attendees: attendees, event: event)
+      send_data result.pdf.render, filename: 'badges.pdf', type: 'application/pdf', disposition: 'inline'
+    else
+      flash[:alert] = "No Attendees to Export (PDF)"
+      redirect_to event_path(event)
+    end
+  end
+
+  def export_blanks
+    event = Event.find(params[:event_id])
+
+    result = ExportAttendees.call(event: event, blanks: true)
+    send_data result.pdf.render, filename: 'badges.pdf', type: 'application/pdf', disposition: 'inline'
+  end
+
   def destroy
     @event = Event.find(params[:event_id])
 
@@ -43,7 +63,7 @@ class AttendeesController < ApplicationController
   private
 
   def attendee_params
-    params.require(:attendee).permit(:first_name, :last_name, :email, :registration_key, :preferences, :role, :checked_in, :exported)
+    params.require(:attendee).permit(:first_name, :last_name, :email, :registration_key, :preferences, :role_id, :checked_in, :exported)
   end
 
 end
