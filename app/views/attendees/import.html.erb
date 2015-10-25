@@ -1,5 +1,7 @@
+<h1 class="page-title">Import Attendees</h1>
+<small>Select a .csv file. Ensure your header row matches the set header text for the event.</small>
 <%= form_tag(import_event_attendees_path, multipart: true, method: :post) do %>
-  <%= label_tag :file, "Select .CSV file" %>
+  <%= label_tag :file, "Import File (.csv)" %>
   <%= file_field_tag :file %>
   <%= submit_tag %>
 <% end %>

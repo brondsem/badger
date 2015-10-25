@@ -1,0 +1,63 @@
+<% if user.errors.any? %>
+  <p class="alert">Unable to create user.
+  <ul>
+    <% user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+  </p>
+<% end %>
+
+<%= form_for(user) do |f| %>
+  <div class="twogroups">
+    <div>
+      <%= f.label :first_name %>
+    </div>
+    <div>
+      <%= f.text_field :first_name, autofocus: true %>
+    </div>
+  </div>
+
+  <div class="twogroups">
+    <div>
+      <%= f.label :last_name %>
+    </div>
+    <div>
+      <%= f.text_field :last_name %>
+    </div>
+  </div>
+
+  <div class="twogroups">
+    <div>
+      <%= f.label :email, "Email Address" %>
+    </div>
+    <div>
+      <%= f.email_field :email %>
+    </div>
+  </div>
+
+  <div class="twogroups">
+    <div><label>Permissions</label></div>
+    <% if current_user.admin %>
+      <div>
+        <%= f.check_box :admin %>
+        <%= f.label :admin %>
+        <%= f.check_box :manager %>
+        <%= f.label :manager %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="twogroups">
+    <div><%= f.label :event_ids, "Events" %></div>
+    <div>
+      <%= collection_check_boxes :user, :event_ids, Event.alphabetical, :id, :name, {}, class: "test"  %>
+    </div>
+  </div>
+  <div class="twogroups">
+    <div></div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+  </div>
+<% end %>
