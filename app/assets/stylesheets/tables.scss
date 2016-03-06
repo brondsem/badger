@@ -1,0 +1,12 @@
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+td, th {
+  padding: 0.5em;
+}

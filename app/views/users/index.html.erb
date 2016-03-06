@@ -1,17 +1,21 @@
-<h2>Users</h2>
-<%= link_to "New User", new_user_path %>
+<nav class="righthand-nav">
+  <%= link_to "Add User", new_user_path, class: "btn btn-primary" %>
+</nav>
+<h1>User Accounts</h1>
 
 <table>
   <thead>
     <th>Name</th>
     <th>Email</th>
+    <th>Events</th>
     <th></th>
   </thead>
   <% @users.each do |user| %>
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td>
+      <td><%= user.events.pluck(:name).join(", ") %></td>
+      <td class="actions">
         <%= link_to "Edit", edit_user_path(user) %>
         <% if current_user.admin %>
           <%= link_to "Delete", user_path(user), method: :delete %>

@@ -1,0 +1,25 @@
+input[type="checkbox"] + label:after {
+  content: "\a";
+  white-space: pre;
+}
+
+.twogroups {
+  margin-bottom: 1em;
+  div {
+    vertical-align: top;
+    width: 150px;
+    text-align: right;
+    display: inline-block;
+    margin-right: 20px;
+  }
+
+  div + div {
+    width: 400px;
+    text-align: left;
+  }
+
+  div input[type="text"],
+  div input[type="email"] {
+    width: 400px;
+  }
+}

@@ -1,15 +1,29 @@
 <%= form_for([event, role]) do |f| %>
-<div class="field">
-  <%= f.label :name, value: "Role name" %><br />
-  <%= f.text_field :name, autofocus: true %>
+<div class="twogroups">
+  <div><%= f.label :name, value: "Role name" %></div>
+  <div>
+    <%= f.text_field :name, autofocus: true %>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :reference_key, value: "Reference Key" %><br />
-  <%= f.text_field :reference_key, autofocus: true %>
+<div class="twogroups">
+  <div><%= f.label :border_color, value: "Border Color" %></div>
+  <div>
+    <%= f.text_field :border_color, autofocus: true %>
+  </div>
 </div>
 
-<div class="actions">
-  <%= f.submit %>
+<div class="twogroups">
+  <div><%= f.label :reference_key, value: "Reference Key" %></div>
+  <div>
+    <%= f.text_field :reference_key, autofocus: true %>
+  </div>
+</div>
+
+<div class="twogroups">
+  <div></div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 </div>
 <% end %>

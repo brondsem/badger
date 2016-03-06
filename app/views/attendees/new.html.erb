@@ -1,5 +1,4 @@
-<h4><%= link_to @event.name, event_path(@event)%></h4>
-<h2>New attendee</h2>
+<h1>Add Attendee <small><%= link_to @event.name, event_path(@event)%></small></h1>
 
 <% if @attendee.errors.any? %>
   <p class="alert">Unable to create attendee.

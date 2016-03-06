@@ -1,4 +1,4 @@
-<h2>Edit attendee</h2>
+<h1>Edit Attendee <small><%= link_to @event.name, event_path(@event)%></small></h1>
 
 <% if @attendee.errors.any? %>
   <p class="alert">Unable to update attendee.

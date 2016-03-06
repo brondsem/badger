@@ -1,23 +1,38 @@
-<h4><%= link_to @event.name, event_path(@event) %></h4>
-<h1>Roles</h1>
+<h1 class="page-title">Roles
+  <small><%= link_to @event.name, event_path(@event) %></small>
+  <%= link_to "Add Role", new_event_role_path(@event), class: "btn btn-primary pull-right" %>
+</h1>
 
-<%= link_to "New Role", new_event_role_path(@event) %>
-<table>
-  <thead>
-    <th>Role</th>
-    <th>Reference Key</th>
-    <th></th>
-  </thead>
-  <tbody>
-    <% @event.roles.each do |role| %>
-      <tr>
-        <td><%= role.name %></td>
-        <td><%= role.reference_key %></td>
-        <td>
-          <%= link_to "Edit", edit_event_role_path(@event, role) %>
-          <%= link_to "Delete", event_role_path(@event, role), method: :delete %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% @event.roles.each do |role| %>
+  <section>
+    <h2><%= role.name %></h2>
+    <div class="preview">
+      <div style="border: 10px solid #<%= role.border_color %>; height: 200px; width: 130px;">
+        <%= image_tag @event.logo %>
+        <div class="first">First</div>
+        <div class="last">Last</div>
+        <div class="role"><%= role.name %></div>
+      </div>
+    </div>
+    <div class="info">
+      <%= form_for [@event, role] do |f| %>
+        <%= f.label :name do %>
+          Role Display
+          <%= f.text_field :name %>
+        <% end %>
+        <%= f.label :reference_key do %>
+          CSV Role
+          <%= f.text_field :reference_key %>
+          <small>Key that corresponds to this role.</small>
+        <% end %>
+        <%= f.label :border_color do %>
+          Badge Color
+          <%= f.text_field :border_color %>
+        <% end %>
+
+        <%= f.submit "Update Role" %>
+        <%= link_to "Remove", event_role_path(@event, role), method: :delete, confirm: "This action cannot be undone." %>
+      <% end %>
+    </div>
+  </section>
+<% end %>

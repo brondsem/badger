@@ -13,7 +13,6 @@ gem "jquery-rails"
 gem "jquery-ui-rails"
 gem "pg"
 gem "prawn"
-gem "ransack"
 gem "uglifier"
 gem "sass-rails"
 

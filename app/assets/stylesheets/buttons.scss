@@ -1,0 +1,99 @@
+@mixin button-variant($color, $background, $border) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  &:hover,
+  &:focus,
+  &.focus,
+  &:active,
+  &.active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $background;
+    border-color: $border;
+  }
+
+  &.disabled,
+  &[disabled],
+  fieldset[disabled] & {
+    &,
+    &:hover,
+    &:focus,
+    &.focus,
+    &:active,
+    &.active {
+      background-color: $background;
+          border-color: $border;
+    }
+  }
+
+  .badge {
+    color: $background;
+    background-color: $color;
+  }
+}
+
+a.btn,
+button {
+  color: #898989;
+  background-color: #f7f7f7;
+}
+
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-decoration: none;
+
+  font-family: HelveticaNeue-Thin, "HelveticaNeue-Thin", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+  -webkit-transition: -webkit-transform .2s;
+  transition: transform .2s;
+
+  + .btn {
+    margin-right: 0.5em;
+  }
+}
+
+.btn-xs {
+  padding: 1px 5px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+a.btn,
+.btn {
+  &:disabled,
+  &:disabled:hover,
+  &.disabled-with {
+    border-color: #e4e4e4;
+    color: #898989;
+    background: #f7f7f7;
+  }
+}
+
+a.btn-primary,
+.btn-primary {
+  @include button-variant(#fff, #b2d225, #9fbf14);
+}
+
+a.btn-secondary,
+.btn-secondary {
+  @include button-variant(#fff, #429cca, #3087a9);
+}
+
+input[type="submit"] {
+  @extend .btn;
+  @extend .btn-primary;
+}
+

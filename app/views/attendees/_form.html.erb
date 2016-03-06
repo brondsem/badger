@@ -1,25 +1,44 @@
 <%= form_for([event, attendee]) do |f| %>
-<div class="field">
-  <%= f.label :first_name %><br />
-  <%= f.text_field :first_name, autofocus: true %>
+<div class="twogroups">
+  <div>
+    <%= f.label :first_name %>
+  </div>
+  <div>
+    <%= f.text_field :first_name, autofocus: true %>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :last_name %><br />
-  <%= f.text_field :last_name %>
+<div class="twogroups">
+  <div>
+    <%= f.label :last_name %>
+  </div>
+  <div>
+    <%= f.text_field :last_name %>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :email %><br />
-  <%= f.text_field :email %>
+<div class="twogroups">
+  <div>
+    <%= f.label :email %>
+  </div>
+  <div>
+    <%= f.text_field :email %>
+  </div>
 </div>
 
-<div class="field">
-  <%= f.label :role %><br />
-  <%= f.select :role_id, options_for_select(@event.roles.pluck(:name, :id)) %>
+<div class="twogroups">
+  <div>
+    <%= f.label :role %>
+  </div>
+  <div>
+    <%= f.select :role_id, options_for_select(@event.roles.pluck(:name, :id)) %>
+  </div>
 </div>
 
-<div class="actions">
-  <%= f.submit %>
+<div class="twogroups">
+  <div></div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
 </div>
 <% end %>
