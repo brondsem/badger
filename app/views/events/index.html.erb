@@ -1,8 +1,9 @@
-<% if current_user.admin || current_user.manager %>
-  <%= link_to "Add Event", new_event_path, class: "btn btn-primary pull-right" %>
-<% end %>
-
-<h1 class="page-title">Events</h1>
+<nav class="righthand-nav">
+  <% if current_user.admin || current_user.manager %>
+    <%= link_to "Add Event", new_event_path, class: "btn btn-primary" %>
+  <% end %>
+</nav>
+<h1>Events</h1>
 
 <table>
   <thead>

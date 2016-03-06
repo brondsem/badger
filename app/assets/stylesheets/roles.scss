@@ -1,0 +1,56 @@
+section {
+  height: 100%;
+  width: 452px;
+  clear: both;
+  padding-top: 0.5em;
+  display: inline-block
+}
+
+div.preview {
+  font-weight: normal;
+  display: inline-block;
+  float: left;
+
+  div {
+    text-align: center;
+  }
+
+  img {
+    max-height: 35px;
+    max-width: 130px;
+  }
+
+  .first {
+    position: relative;
+    top: 35px;
+  }
+
+  .last {
+    position: relative;
+    top: 40px;
+  }
+
+  .role {
+    position: relative;
+    top: 100px;
+  }
+}
+
+div.info {
+  margin-left: 2em;
+  float: left;
+  display: inline-block;
+  width: 452px - 178px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+
+    input {
+      display: block;
+      padding: 2px;
+      border: 1px solid #c8c8c8;
+      border-radius: 5px;
+    }
+  }
+}

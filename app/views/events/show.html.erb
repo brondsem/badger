@@ -1,6 +1,8 @@
-<%= link_to "Import Attendees", import_event_attendees_path(@event), class: "btn btn-primary pull-right" %>
-<%= link_to "Add Attendee", new_event_attendee_path(@event), class: "btn btn-primary pull-right" %>
-<h1 class="page-title"><%= @event.name %></h2>
+<nav class="righthand-nav">
+  <%= link_to "Import Attendees", import_event_attendees_path(@event), class: "btn btn-primary" %>
+  <%= link_to "Add Attendee", new_event_attendee_path(@event), class: "btn btn-primary" %>
+</nav>
+<h1><%= @event.name %></h1>
 
 <nav>
   <%= link_to "Roles", event_roles_path(@event) %>
