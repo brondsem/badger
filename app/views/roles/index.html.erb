@@ -5,7 +5,7 @@
 
 <% @event.roles.each do |role| %>
   <section>
-    <h2><%= role.name %></h2>
+    <h2><%= role.name.presence || "<No Role Display>"%></h2>
     <div class="preview">
       <div style="border: 10px solid #<%= role.border_color %>; height: 200px; width: 130px;">
         <%= image_tag @event.logo %>
