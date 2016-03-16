@@ -63,7 +63,7 @@ class RectangleBadgePdf < Prawn::Document
   end
 
   def generate_pdf
-    roles = attendees.group_by(&:role)
+    roles = attendees.alphabetical.group_by(&:role)
     roles.each do |role, role_attendees|
       role_attendees.each_slice(4).with_index do |page, num|
         # Don't start with a blank page
