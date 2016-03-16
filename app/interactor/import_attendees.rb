@@ -16,7 +16,7 @@ class ImportAttendees
     require "csv"
 
     CSV.foreach(file.path, headers: true) do |row|
-      attendee = context.event.attendees.find_or_create_by(email: row['email'])
+      attendee = context.event.attendees.find_or_create_by(first_name: row['first_name'], last_name: row['last_name'], email: row['email'])
 
       unless attendee.exported
         attendee.update_attributes(
@@ -28,7 +28,7 @@ class ImportAttendees
             twitter: row['twitter'],
             company: row["company"]
           },
-          role: context.event.roles.find_by(name: row["role"].strip),
+          role: context.event.roles.where("reference_key ILIKE ?", "%#{row['role']}%").first || context.event.roles.first,
           exported: false
         )
       end
