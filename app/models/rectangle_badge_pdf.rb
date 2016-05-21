@@ -168,7 +168,7 @@ class RectangleBadgePdf < Prawn::Document
   end
 
   def draw_name(attendee)
-    text attendee.first_name, align: :center, size: 34, style: :bold
+    text attendee.first_name, align: :center, size: 30, style: :bold
     move_down 5
     text attendee.last_name, align: :center, size: 30, style: :bold
   end
