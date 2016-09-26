@@ -27,9 +27,7 @@
       <td><%= attendee.preferences["twitter"] %></td>
       <td class="actions">
         <%= link_to "Edit", edit_event_attendee_path(@event, attendee) %>
-        <% if current_user.admin %>
-          <%= link_to "Delete", event_attendee_path(@event, attendee), method: :delete %>
-        <% end %>
+        <%= link_to "Delete", event_attendee_path(@event, attendee), method: :delete %>
       </td>
     </tr>
   <% end %>
