@@ -51,7 +51,7 @@ class RectangleBadgePdf < Prawn::Document
       move_down BORDER_WIDTH
 
       draw_logo
-      
+
       bounding_box([bounds.left, bounds.bottom + 40], width: WIDTH, height: 30) do
         text role.name, align: :center, size: 25, valign: :bottom
       end
