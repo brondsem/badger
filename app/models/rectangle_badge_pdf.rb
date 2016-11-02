@@ -144,8 +144,8 @@ class RectangleBadgePdf < Prawn::Document
 
       move_down 10
       bounding_box([bounds.left + 5, bounds.height / 2 - 20], width: WIDTH - 10, height: 50) do
-        text attendee.preferences["company"], size: 14, align: :center
-        text attendee.preferences["twitter"], size: 16, align: :center
+        text attendee.company, size: 14, align: :center
+        text attendee.twitter, size: 16, align: :center
       end
 
       move_down 15

@@ -23,8 +23,8 @@
       <td><%= attendee.last_name %></td>
       <td><%= attendee.email %></td>
       <td><%= attendee.role.name %></td>
-      <td><%= attendee.preferences["company"] %></td>
-      <td><%= attendee.preferences["twitter"] %></td>
+      <td><%= attendee.company %></td>
+      <td><%= attendee.twitter %></td>
       <td class="actions">
         <%= link_to "Edit", edit_event_attendee_path(@event, attendee) %>
         <%= link_to "Delete", event_attendee_path(@event, attendee), method: :delete %>
