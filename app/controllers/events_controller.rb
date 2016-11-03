@@ -17,7 +17,7 @@ class EventsController < ApplicationController
     @event.users << current_user
 
     if @event.save
-      redirect_to event_path(@event)
+      redirect_to event_roles_path(@event)
     else
       render :new
     end
