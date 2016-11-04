@@ -63,6 +63,8 @@ GEM
     erubis (2.7.0)
     execjs (2.6.0)
     ffi (1.9.10)
+    font-awesome-rails (4.7.0.0)
+      railties (>= 3.2, < 5.1)
     formatador (0.2.5)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
@@ -216,6 +218,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails
   devise
+  font-awesome-rails
   guard-bundler
   guard-rails
   interactor
@@ -232,4 +235,4 @@ DEPENDENCIES
   uglifier
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

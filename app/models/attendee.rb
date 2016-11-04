@@ -28,4 +28,8 @@ class Attendee < ActiveRecord::Base
   def self.not_exported
     where(exported: false)
   end
+
+  def check_in
+    update(checked_in: !checked_in?)
+  end
 end
