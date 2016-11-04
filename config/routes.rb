@@ -13,6 +13,10 @@ Rails.application.routes.draw do
         post :export
         post :export_blanks
       end
+
+      member do
+        post :check_in
+      end
     end
   end
 

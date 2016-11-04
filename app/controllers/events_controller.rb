@@ -25,6 +25,7 @@ class EventsController < ApplicationController
 
   def show
     @event = Event.find(params[:id])
+    @attendees = @event.attendees.with_name(params[:first_name], params[:last_name])
   end
 
   def edit

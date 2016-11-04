@@ -92,8 +92,3 @@ a.btn-secondary,
   @include button-variant(#fff, #429cca, #3087a9);
 }
 
-input[type="submit"] {
-  @extend .btn;
-  @extend .btn-primary;
-}
-

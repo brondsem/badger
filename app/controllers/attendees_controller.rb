@@ -31,6 +31,14 @@ class AttendeesController < ApplicationController
     end
   end
 
+  def check_in
+    event = Event.find(params[:event_id])
+    attendee = event.attendees.find(params[:id])
+
+    attendee.check_in
+    render json: {checked_in: attendee.checked_in?}, status: :ok
+  end
+
   def export
     event = Event.find(params[:event_id])
     attendees = event.attendees.includes(:role).alphabetical
