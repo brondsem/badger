@@ -9,6 +9,14 @@
   <%= link_to "Generate Badges", export_event_attendees_path(@event), method: :post, target: "_blank" %>
   <%= link_to "Generate Blanks", export_blanks_event_attendees_path(@event), method: :post, target: "_blank" %>
 </nav>
+
+<div>
+  <%= form_tag event_path(@event), method: :get do %>
+    <%= text_field_tag "first_name", params['first_name'], placeholder: "First Name"  %>
+    <%= text_field_tag "last_name", params['last_name'], placeholder: "Last Name"  %>
+    <%= submit_tag "Search", class: "btn btn-xs btn-secondary"  %>
+  <% end %>
+</div>
 <table>
   <th>First Name</th>
   <th>Last Name</th>
@@ -17,18 +25,5 @@
   <th>Company</th>
   <th>Twitter</th>
   <th></th>
-  <% @event.attendees.includes(:role).alphabetical.each do |attendee| %>
-    <tr>
-      <td><%= attendee.first_name %></td>
-      <td><%= attendee.last_name %></td>
-      <td><%= attendee.email %></td>
-      <td><%= attendee.role.name %></td>
-      <td><%= attendee.company %></td>
-      <td><%= attendee.twitter %></td>
-      <td class="actions">
-        <%= link_to "Edit", edit_event_attendee_path(@event, attendee) %>
-        <%= link_to "Delete", event_attendee_path(@event, attendee), method: :delete %>
-      </td>
-    </tr>
-  <% end %>
+  <%= render partial: "attendees", locals: {event: @event, attendees: @attendees} %>
 </table>
