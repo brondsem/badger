@@ -48,12 +48,13 @@ class RectangleBadgePdf < Prawn::Document
     }
 
     bounding_box(badge_bounds[ord + 1], :width => WIDTH, :height => HEIGHT) do
-      move_down BORDER_WIDTH
+      move_down BORDER_WIDTH * 1.5
 
       draw_logo
 
-      bounding_box([bounds.left, bounds.bottom + 40], width: WIDTH, height: 30) do
-        text role.name, align: :center, size: 25, valign: :bottom
+      bounding_box([bounds.left + BORDER_WIDTH, bounds.bottom + 40], width: WIDTH - (BORDER_WIDTH * 2), height: 30) do
+        text @event.name.upcase, size: 12, align: :left, valign: :bottom
+        draw_role(role)
       end
 
       stroke_color role.border_color
@@ -133,7 +134,7 @@ class RectangleBadgePdf < Prawn::Document
     }
 
     bounding_box(badge_bounds[ord + 1], :width => WIDTH, :height => HEIGHT) do
-      move_down BORDER_WIDTH
+      move_down BORDER_WIDTH * 1.5
 
       draw_logo
 
@@ -150,8 +151,9 @@ class RectangleBadgePdf < Prawn::Document
 
       move_down 15
 
-      bounding_box([bounds.left, bounds.bottom + 40], width: WIDTH, height: 30) do
-        draw_role(attendee)
+      bounding_box([bounds.left + BORDER_WIDTH, bounds.bottom + 40], width: WIDTH - (BORDER_WIDTH * 2), height: 30) do
+        text attendee.event.name.upcase, size: 12, align: :left, valign: :bottom
+        draw_role(attendee.role)
       end
 
       stroke_color attendee.role.border_color
@@ -173,7 +175,16 @@ class RectangleBadgePdf < Prawn::Document
     text attendee.last_name, align: :center, size: 30, style: :bold
   end
 
-  def draw_role(attendee)
-    text attendee.role.name, size: 25, align: :center, valign: :bottom
+  def draw_role(role)
+    role_width = width_of(role.name.upcase, size: 12)
+    stroke do
+      line_width 0
+      stroke_color role.border_color
+      fill_color role.border_color
+      fill_and_stroke_rectangle [bounds.right - BORDER_WIDTH - role_width, bounds.bottom + 20], role_width + BORDER_WIDTH * 2, 30
+    end
+    fill_color 'FFFFFF'
+    text role.name.upcase, size: 12, align: :right, valign: :bottom
+    fill_color '000000'
   end
 end
