@@ -29,7 +29,9 @@ Go to http://localhost:3000/
 # Usage
 
 Create account
+
 Go to http://localhost:3000/events/new
+
 Create a role.  Color should be hex, like: `FF0000`
 
 # Import CSV
